@@ -1,25 +1,30 @@
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
+
 @theme {
   --font-sans: "MuseoSans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
+
+/* FUENTES: Cambiadas a rutas relativas para que Vite las procese y compile */
 @font-face {
   font-family: 'MuseoSans';
-  src: url('/fonts/MuseoSans-500.woff2') format('woff2'),
-       url('/fonts/MuseoSans-500.woff') format('woff');
+  src: url('./fonts/MuseoSans-500.woff2') format('woff2'),
+       url('./fonts/MuseoSans-500.woff') format('woff');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'MuseoSans';
-  src: url('/fonts/MuseoSans-700.woff2') format('woff2'),
-       url('/fonts/MuseoSans-700.woff') format('woff');
+  src: url('./fonts/MuseoSans-700.woff2') format('woff2'),
+       url('./fonts/MuseoSans-700.woff') format('woff');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
-/*ESTILOS GENERALES*/
+
+/* ESTILOS GENERALES */
 @variant dark (&:where(.dark, .dark *));
 
 html, 
@@ -31,91 +36,103 @@ body,
   padding: 0;
   font-family: var(--font-sans);
 }
-/*  MAPA (LEAFLET) Y COMPONENTES*/
+
 .leaflet-container {
   width: 100%;
   height: 100%;
 }
+
 .dark .leaflet-tile-container {
   filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
 }
+
 .dark .icono-gps-personalizado {
   filter: invert(100%) hue-rotate(180deg);
 }
+
 .dark .leaflet-tile-container {
   filter: invert(100%) hue-rotate(180deg) brightness(85%) contrast(110%) saturate(80%);
 }
+
 .dark .leaflet-tile-container img {
   mix-blend-mode: difference;
 }
+
 .dark .icono-gps-personalizado,
 .dark .leaflet-marker-icon,
 .dark .leaflet-marker-shadow {
   filter: invert(100%) hue-rotate(180deg) brightness(120%);
 }
+
 .dark .leaflet-control-attribution {
   background-color: rgba(15, 23, 42, 0.8) !important; 
   color: #94a3b8 !important; /* text-slate-400 */
 }
+
 .dark .leaflet-control-attribution a {
   color: #38bdf8 !important; 
 }
-/* DISEÑO DE SCROLLBARS PERSONALIZADO Y ELEGANTE*/
+
+/* SCROLLBARS */
 ::-webkit-scrollbar {
-  width: 5px;  /* Súper delgado para scroll vertical */
-  height: 5px; /* Súper delgado para scroll horizontal */
+  width: 5px; 
+  height: 5px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent; 
 }
+
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(156, 163, 175, 0.3); /* Gris suave translúcido en modo claro */
+  background-color: rgba(156, 163, 175, 0.3); 
   border-radius: 20px;
   transition: background-color 0.2s ease;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(156, 163, 175, 0.5);
 }
+
 .dark ::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 255, 194, 0.15); /* Verde menta sutil con opacidad */
+  background-color: rgba(0, 255, 194, 0.15);
 }
+
 .dark ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(0, 255, 194, 0.4); /* Verde menta más encendido al pasar el mouse */
+  background-color: rgba(0, 255, 194, 0.4); 
 }
+
+/* CORREGIDO: Se cerró la llave faltante de la regla @supports */
 @supports (scrollbar-color: auto) {
   * {
     scrollbar-width: thin; /* Barra delgada nativa */
-    scrollbar-color: rgba(156, 163, 175, 0.3) transparent; /* Gris en modo claro */
+    scrollbar-color: rgba(156, 163, 175, 0.3) transparent; 
   }
   .dark * {
-    scrollbar-color: rgba(0, 255, 194, 0.15) transparent; /* Verde menta en modo oscuro */
+    scrollbar-color: rgba(0, 255, 194, 0.15) transparent; 
   }
 }
-/* ==========================================
-   ARQUITECTURA DE SCROLLS NATIVOS EN MÓVILES (CON ID)
-   ========================================== */
+
+/* MEDIA QUERIES */
 @media (max-width: 767px) {
-  /* 1. El padre NO debe hacer scroll, solo contener los elementos de forma rígida */
   #contenedor-paneles-movil {
     max-height: 48vh;
     overflow: visible;
   }
 
-  /* 2. Ajuste estricto para la tarjeta de la lista de Vehículos */
   #lista-vehiculos-movil {
     height: 42vh;
     max-height: 42vh;
-    overflow: hidden; /* Mantiene el buscador fijo arriba */
+    overflow: hidden;
   }
 
-  /* Forzamos a la sub-caja interna de los carros a hacer el scroll real */
   #lista-vehiculos-movil .overflow-y-auto {
     overflow-y: auto !important;
     overflow-x: hidden !important;
-    max-height: calc(42vh - 110px) !important; /* Resta el espacio del buscador y el botón de país */
+    max-height: calc(42vh - 110px) !important; 
     touch-action: pan-y !important;
     -webkit-overflow-scrolling: touch;
   }
+
   #telemetria-movil {
     height: 42vh;
     max-height: 42vh;
@@ -125,14 +142,17 @@ body,
     -webkit-overflow-scrolling: touch;
   }
 }
+
 @media (min-width: 768px) {
   #contenedor-paneles-movil {
     max-height: 75vh;
   }
+
   #lista-vehiculos-movil {
     height: 260px;
     max-height: none;
   }
+
   #telemetria-movil {
     max-height: none;
     overflow: visible;
