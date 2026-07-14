@@ -201,7 +201,7 @@ export default function App() {
   );
 
   return (
-    <div className="fixed inset-0 w-screen h-screen overflow-hidden bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-50">
+<div className="fixed inset-0 w-screen h-[100dvh] overflow-hidden bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-50">
       {/* MAPA */}
       <div className="absolute inset-0 w-full h-full z-0 pointer-events-auto">
         <VistaMapa posicion={posicionActual} />
