@@ -224,7 +224,7 @@ export default function App() {
                   Sala de Control
                 </h1>
                 <p className="text-[10px] text-slate-400">
-                  Logística de vehículos 
+                  Logística de vehículos
                 </p>
               </div>
             </div>
@@ -247,20 +247,20 @@ export default function App() {
 
         {/* PANTALLA DE CARGA */}
         {cargando && (
-     <div className="absolute inset-0 bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur-md flex flex-col items-center justify-center gap-4 pointer-events-auto z-50">
-  <div className="p-5 bg-[#00f1c7] rounded-full shadow-lg shadow-[#00f1c7]/30 dark:shadow-[#00f1c7]/50 animate-bounce text-slate-950">
-    <Car size={32} />
-  </div>
+          <div className="absolute inset-0 bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur-md flex flex-col items-center justify-center gap-4 pointer-events-auto z-50">
+            <div className="p-5 bg-[#00f1c7] rounded-full shadow-lg shadow-[#00f1c7]/30 dark:shadow-[#00f1c7]/50 animate-bounce text-slate-950">
+              <Car size={32} />
+            </div>
 
-  <div className="text-center px-4">
-    <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">
-      Estamos preparando tus vehículos...
-    </p>
-    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-      Sincronizando los últimos detalles.
-    </p>
-  </div>
-</div>
+            <div className="text-center px-4">
+              <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">
+                Estamos preparando tus vehículos...
+              </p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                Sincronizando los últimos detalles.
+              </p>
+            </div>
+          </div>
         )}
 
         {error && (
