@@ -209,7 +209,7 @@ export default function App() {
 
       {/* CAPA DE INTERFAZ */}
       <div className="absolute inset-0 pointer-events-none z-10 flex flex-col justify-between" role="main">
-        <header className="w-full flex items-center justify-between pointer-events-auto bg-[#04050a]/90 backdrop-blur-md border-x-0 border-t-0 border-b border-slate-200 dark:border-[#00FFC2]/20 p-3 md:px-6 rounded-none shadow-lg transition-colors duration-300">
+        <header className="w-full flex items-center justify-between pointer-events-auto bg-[#04050a]/90 backdrop-blur-md border-x-0 dark:border-[#00FFC2]/20 p-3 md:px-6 rounded-none shadow-lg transition-colors duration-300">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-3">
               {/* Logo */}
