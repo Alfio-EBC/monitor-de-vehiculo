@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { MapContainer, Marker, useMap, ZoomControl } from 'react-leaflet';
-import { Layers, Map, Mountain, Moon } from 'lucide-react';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import React, { useEffect, useState, useRef } from "react";
+import { MapContainer, Marker, useMap, ZoomControl } from "react-leaflet";
+import { Layers, Map, Mountain, Moon, Target } from "lucide-react";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
 import miAutoSvgRaw from "../imagenes/mi-auto.svg?raw";
 
@@ -12,25 +12,25 @@ function CambiarVista({ centro, idVehiculo }) {
   const ultimoIdCentrado = useRef(null);
   useEffect(() => {
     if (centro && centro[0] && centro[1]) {
-      // Solo mover la cámara si realmente cambió el vehículo seleccionado
       if (ultimoIdCentrado.current !== idVehiculo) {
         const zoomActual = mapa.getZoom();
 
-        // Convertimos la coordenada geográfica real a píxeles en la pantalla
         const puntoProyecto = mapa.project([centro[0], centro[1]], zoomActual);
-
-        // Calculamos la compensación exacta en píxeles
         const esMovil = window.innerWidth < 768;
-        const compensacionPixeles = esMovil ? 120 : 50; 
+        const compensacionPixeles = esMovil ? 120 : 50;
 
-        // Modificamos el punto del proyecto y lo regresamos a coordenadas geográficas (lat, lon)
-        const puntoCompensado = L.point(puntoProyecto.x, puntoProyecto.y + compensacionPixeles);
-        const coordenadaCompensada = mapa.unproject(puntoCompensado, zoomActual);
+        const puntoCompensado = L.point(
+          puntoProyecto.x,
+          puntoProyecto.y + compensacionPixeles,
+        );
+        const coordenadaCompensada = mapa.unproject(
+          puntoCompensado,
+          zoomActual,
+        );
 
-        // Hacemos un ÚNICO setView fluido al punto calculado
         mapa.setView(coordenadaCompensada, zoomActual, {
           animate: true,
-          duration: 0.5
+          duration: 0.5,
         });
 
         ultimoIdCentrado.current = idVehiculo;
@@ -50,7 +50,7 @@ function CapaConFade({ url, attribution }) {
     if (!mapa) return;
 
     const nuevaCapa = L.tileLayer(url, { attribution });
-    
+
     if (capaRef.current) {
       nuevaCapa.setOpacity(0);
       nuevaCapa.addTo(mapa);
@@ -82,11 +82,13 @@ function CapaConFade({ url, attribution }) {
 // 3. GENERADOR DEL ICONO PERSONALIZADO DEL VEHÍCULO
 const crearIconoAutomovil = (rumbo = 0, velocidad = 0) => {
   const estaEnMovimiento = velocidad > 0;
-  const colorTuBase = '#00bb9b';
-  const colorOscuroFondo = '#131b44'; 
+  const colorTuBase = "#00bb9b";
+  const colorOscuroFondo = "#131b44";
 
-  const svgProcesado = miAutoSvgRaw
-    .replace('<svg', `<svg class="w-7 h-7 ${estaEnMovimiento ? 'animate-pulse' : ''}" style="fill: ${colorOscuroFondo};"`);
+  const svgProcesado = miAutoSvgRaw.replace(
+    "<svg",
+    `<svg class="w-7 h-7 ${estaEnMovimiento ? "animate-pulse" : ""}" style="fill: ${colorOscuroFondo};"`,
+  );
 
   return L.divIcon({
     html: `
@@ -98,7 +100,6 @@ const crearIconoAutomovil = (rumbo = 0, velocidad = 0) => {
           
           <div class="w-full h-full flex items-center justify-center relative">
             
-            <!-- Flecha indicadora de rumbo -->
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute -top-1" style="overflow: visible;">
               <path d="M12 1L15 4.5H13.2V6.5H10.8V4.5H9L12 1Z" 
                     fill="${colorOscuroFondo}" 
@@ -107,79 +108,101 @@ const crearIconoAutomovil = (rumbo = 0, velocidad = 0) => {
                     stroke-linejoin="round" />
             </svg>
 
-            <!-- Inyección directa del texto del SVG -->
             ${svgProcesado}
 
           </div>
         </div>
       </div>
     `,
-    // Dejar clases transparentes para que Leaflet dibuje correctamente su contenedor físico absoluto
-    className: 'bg-transparent border-none shadow-none', 
+    className: "bg-transparent border-none shadow-none",
     iconSize: [48, 48],
-    iconAnchor: [24, 24]
+    iconAnchor: [24, 24],
   });
 };
 
 const MAPAS_DISPONIBLES = {
   vial: {
-    nombre: 'Mapa Vial',
-    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    attribution: '&copy; OpenStreetMap',
-    icon: Map
+    nombre: "Mapa Vial",
+    url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    attribution: "&copy; OpenStreetMap",
+    icon: Map,
   },
   satelital: {
-    nombre: 'Satélite',
-    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-    attribution: '&copy; Esri',
-    icon: Layers
+    nombre: "Satélite",
+    url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    attribution: "&copy; Esri",
+    icon: Layers,
   },
   topografico: {
-    nombre: 'Topográfico',
-    url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
-    attribution: '&copy; OpenTopoMap',
-    icon: Mountain
+    nombre: "Topográfico",
+    url: "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+    attribution: "&copy; OpenTopoMap",
+    icon: Mountain,
   },
   oscuro: {
-    nombre: 'Modo Oscuro',
-    url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-    attribution: '&copy; CARTO',
-    icon: Moon
-  }
+    nombre: "Modo Oscuro",
+    url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+    attribution: "&copy; CARTO",
+    icon: Moon,
+  },
 };
 
 export default function VistaMapa({ posicion }) {
-  // Coordenada real sin desvíos aritméticos
-  const coordenadaReal = posicion 
-    ? [posicion.latitude, posicion.longitude] 
+  const coordenadaReal = posicion
+    ? [posicion.latitude, posicion.longitude]
     : [4.6097, -74.0817];
-  
+
   const [capaActiva, setCapaActiva] = useState(() => {
-    return document.documentElement.classList.contains('dark') ? 'oscuro' : 'vial';
+    return document.documentElement.classList.contains("dark")
+      ? "oscuro"
+      : "vial";
   });
 
   const [menuAbierto, setMenuAbierto] = useState(false);
 
-  // Sincroniza el mapa con los cambios del modo oscuro global de tu app
+  const mapaRef = useRef(null);
+
   useEffect(() => {
     const observador = new MutationObserver(() => {
-      const esOscuro = document.documentElement.classList.contains('dark');
-      setCapaActiva(esOscuro ? 'oscuro' : 'vial');
+      const esOscuro = document.documentElement.classList.contains("dark");
+      setCapaActiva(esOscuro ? "oscuro" : "vial");
     });
 
     observador.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['class'],
+      attributeFilter: ["class"],
     });
 
     return () => observador.disconnect();
   }, []);
 
+  const centrarMapaManual = () => {
+    const mapa = mapaRef.current;
+    if (!mapa || !coordenadaReal) return;
+
+    const zoomActual = mapa.getZoom();
+    const puntoProyecto = mapa.project(coordenadaReal, zoomActual);
+    const esMovil = window.innerWidth < 768;
+    const compensacionPixeles = esMovil ? 120 : 50;
+
+    const puntoCompensado = L.point(
+      puntoProyecto.x,
+      puntoProyecto.y + compensacionPixeles,
+    );
+    const coordenadaCompensada = mapa.unproject(puntoCompensado, zoomActual);
+
+    mapa.setView(coordenadaCompensada, zoomActual, {
+      animate: true,
+      duration: 0.5,
+    });
+  };
+
   return (
     <div className="w-full h-full relative">
-      
-      {/* 4. RESTAURADO: Menú flotante para cambiar de capas */}
+{/* 🟢 CORREGIDO: El desplegable de capas ahora se renderiza por encima del botón de centrar */}
       <div className="absolute top-24 right-4 md:right-6 z-[100] pointer-events-auto flex flex-col items-end gap-2">
+        
+
         <button
           onClick={() => setMenuAbierto(!menuAbierto)}
           aria-expanded={menuAbierto}
@@ -220,34 +243,44 @@ export default function VistaMapa({ posicion }) {
             );
           })}
         </div>
-      </div>
 
-      {/* 5. CONTENEDOR NATIVO DEL MAPA */}
+        <button
+          onClick={centrarMapaManual}
+          aria-label="Centrar vista en el vehículo activo"
+          className="flex items-center justify-center p-3 bg-white/95 dark:bg-[#04050a]/95 backdrop-blur-md border border-slate-200 dark:border-[#00FFC2]/30 rounded-xl shadow-xl text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-[#00FFC2]/10 hover:border-slate-300 dark:hover:border-[#00FFC2] transition-all active:scale-95 duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00FFC2]"
+        >
+          <Target size={16} className="text-emerald-600 dark:text-[#00FFC2]" aria-hidden="true" />
+        </button>
+
+      </div>
+      {/* CONTENEDOR NATIVO DEL MAPA */}
       <MapContainer
         center={coordenadaReal}
         zoom={13}
         scrollWheelZoom={true}
         className="w-full h-full z-0"
         zoomControl={false}
+        ref={mapaRef} 
       >
-        <CapaConFade 
-          url={MAPAS_DISPONIBLES[capaActiva].url} 
-          attribution={MAPAS_DISPONIBLES[capaActiva].attribution} 
+        <CapaConFade
+          url={MAPAS_DISPONIBLES[capaActiva].url}
+          attribution={MAPAS_DISPONIBLES[capaActiva].attribution}
         />
 
         <ZoomControl position="bottomright" />
-        
-        {/* CambiarVista con cálculo sincrónico de píxeles */}
-        <CambiarVista 
-          centro={coordenadaReal} 
-          idVehiculo={posicion ? posicion.deviceId : null} 
+        <CambiarVista
+          centro={coordenadaReal}
+          idVehiculo={posicion ? posicion.deviceId : null}
         />
 
         {posicion && (
           <Marker
-            position={coordenadaReal} 
+            position={coordenadaReal}
             alt="Ubicación y rumbo actual del vehículo"
-            icon={crearIconoAutomovil(posicion.course || 0, posicion.speed || 0)}
+            icon={crearIconoAutomovil(
+              posicion.course || 0,
+              posicion.speed || 0,
+            )}
           />
         )}
       </MapContainer>

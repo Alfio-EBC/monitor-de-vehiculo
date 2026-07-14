@@ -9,7 +9,9 @@ export default function TarjetaTelemetria({ dispositivoActivo, posicionActual })
       </div>
     );
   }
+
   const esOnline = dispositivoActivo.status === "online";
+
   return (
     <section
       className="bg-white/95 dark:bg-[#04050a]/95 backdrop-blur-md border border-slate-200 dark:border-[#00ffc2]/20 rounded-2xl p-3 shadow-xl w-full flex flex-col gap-2 transition-all duration-300"
@@ -29,66 +31,73 @@ export default function TarjetaTelemetria({ dispositivoActivo, posicionActual })
         </span>
       </div>
 
-      <div className="space-y-2">
+      {/* 👇 CONTENEDOR SEMÁNTICO PRINCIPAL: Lista de Descripción (dl) 👇 */}
+      <dl className="space-y-2">
+        
+        {/* VEHÍCULO */}
         <div className="flex items-center gap-3 p-1.5 bg-slate-50 dark:bg-slate-900/40 rounded-xl border border-slate-100 dark:border-slate-800/50">
-          <div className="p-2 bg-emerald-500/10 dark:bg-[#00FFC2]/10 rounded-lg text-emerald-600 dark:text-[#00FFC2]">
+          <div className="p-2 bg-emerald-500/10 dark:bg-[#00FFC2]/10 rounded-lg text-emerald-600 dark:text-[#00FFC2]" aria-hidden="true">
             <Car size={14} />
           </div>
           <div className="min-w-0 flex-1">
-            <p className="text-[9px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold">
+            <dt className="text-[9px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold">
               Vehículo
-            </p>
-            <p className="text-xs font-bold text-slate-700 dark:text-slate-200 truncate">
+            </dt>
+            <dd className="text-xs font-bold text-slate-700 dark:text-slate-200 truncate">
               {dispositivoActivo.name}
-            </p>
+            </dd>
           </div>
         </div>
 
+        {/* CONEXIÓN */}
         <div className="hidden md:flex items-center gap-3 p-1.5 bg-slate-50 dark:bg-slate-900/40 rounded-xl border border-slate-100 dark:border-slate-800/50">
-          <div className="p-2 bg-emerald-500/10 dark:bg-[#00FFC2]/10 rounded-lg text-emerald-600 dark:text-[#00FFC2]">
+          <div className="p-2 bg-emerald-500/10 dark:bg-[#00FFC2]/10 rounded-lg text-emerald-600 dark:text-[#00FFC2]" aria-hidden="true">
             <Radio size={14} />
           </div>
           <div>
-            <p className="text-[9px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold">
+            <dt className="text-[9px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold">
               Conexión
-            </p>
-            <p className="text-xs font-bold text-slate-700 dark:text-slate-200">
+            </dt>
+            <dd className="text-xs font-bold text-slate-700 dark:text-slate-200">
               {esOnline ? "Conectado" : "Desconectado"}
-            </p>
+            </dd>
           </div>
         </div>
-        {/*Velocidad */}
+
+        {/* VELOCIDAD */}
         <div className="flex items-center gap-3 p-1.5 bg-slate-50 dark:bg-slate-900/40 rounded-xl border border-slate-100 dark:border-slate-800/50">
-          <div className="p-2 bg-emerald-500/10 dark:bg-[#00FFC2]/10 rounded-lg text-emerald-600 dark:text-[#00FFC2]">
+          <div className="p-2 bg-emerald-500/10 dark:bg-[#00FFC2]/10 rounded-lg text-emerald-600 dark:text-[#00FFC2]" aria-hidden="true">
             <Gauge size={14} />
           </div>
           <div>
-            <p className="text-[9px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold">
+            <dt className="text-[9px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold">
               Velocidad
-            </p>
-            <p className="text-xs font-bold text-slate-700 dark:text-slate-200">
+            </dt>
+            <dd className="text-xs font-bold text-slate-700 dark:text-slate-200">
               {posicionActual ? `${posicionActual.speed} km/h` : "---"}
-            </p>
+            </dd>
           </div>
         </div>
+
+        {/* ÚLTIMO REPORTE */}
         <div className="flex items-center gap-3 p-1.5 bg-slate-50 dark:bg-slate-900/40 rounded-xl border border-slate-100 dark:border-slate-800/50">
-          <div className="p-2 bg-emerald-500/10 dark:bg-[#00FFC2]/10 rounded-lg text-emerald-600 dark:text-[#00FFC2]">
+          <div className="p-2 bg-emerald-500/10 dark:bg-[#00FFC2]/10 rounded-lg text-emerald-600 dark:text-[#00FFC2]" aria-hidden="true">
             <Clock size={14} />
           </div>
           <div>
-            <p className="text-[9px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold">
+            <dt className="text-[9px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold">
               Último Reporte
-            </p>
-            <p className="text-xs font-bold text-slate-700 dark:text-slate-200">
+            </dt>
+            <dd className="text-xs font-bold text-slate-700 dark:text-slate-200">
               {posicionActual 
                 ? new Date(dispositivoActivo.lastUpdate).toLocaleTimeString() 
                 : "---"
               }
-            </p>
+            </dd>
           </div>
         </div>
 
-      </div>
+      </dl>
     </section>
   );
 }
