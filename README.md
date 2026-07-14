@@ -65,23 +65,3 @@ Siga estos pasos para ejecutar la aplicacion en su entorno de desarrollo local:
 
     Simulacion de Telemetria Realista: Combina los datos de Traccar con coordenadas y rumbos de simulacion en plano urbano para 40 vehiculos concurrentes distribuidos en ciudades de Colombia, Peru, Argentina, Chile, Mexico y Espana.
 
-
-*Estructura del Codigo
-    El proyecto sigue una arquitectura de componentes modulares y desacoplados:
-
-    ├── public/
-│   └── fonts/                 # Archivos de fuentes locales (MuseoSans)
-├── src/
-│   ├── componentes/
-│   │   ├── VistaMapa.jsx      # Renderizado de React-Leaflet y centrado inteligente
-│   │   ├── TarjetaTelemetria.jsx  # Despliegue de datos del vehiculo seleccionado
-│   │   └── EstadoError.jsx    # UI de manejo de errores de conexion
-│   ├── imagenes/
-│   │   ├── logo-simon-movilidad.svg
-│   │   └── mi-auto.svg        # SVG del vehiculo inyectado de forma dinamica
-│   ├── App.jsx                # Componente principal, ciclo de vida del intervalo e interfaz de usuario
-│   ├── index.css              # Configuracion de Tailwind CSS v4, @font-face y scrollbars
-│   └── main.jsx               # Punto de entrada de React
-├── .env                       # Variables de entorno locales
-├── package.json               # Dependencias del proyecto
-└── README.md                  # Documentacion
