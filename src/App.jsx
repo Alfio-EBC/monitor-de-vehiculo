@@ -279,8 +279,6 @@ export default function App() {
                 Telemetría
               </button>
             </div>
-
-            {/* 🟢 CONTENEDOR PADRE UNIFICADO CON SU ID DE CONTROL (SIN RE-RENDERS DE EVENTOS ADICIONALES) */}
             <div 
               id="contenedor-paneles-movil"
               className="flex flex-col gap-3 pointer-events-auto md:max-h-[75vh] pr-1"
@@ -389,7 +387,7 @@ export default function App() {
                       .map(([pais, ciudades]) => (
                         <div key={pais} className="space-y-1">
                           <h3 className="text-[9px] font-bold uppercase tracking-widest text-slate-450 dark:text-slate-500">
-                            📍 {pais}
+                             {pais}
                           </h3>
 
                           {Object.entries(ciudades)
@@ -422,7 +420,7 @@ export default function App() {
                                         className={`w-full flex items-center justify-between text-[10px] p-1 rounded hover:bg-emerald-50/50 dark:hover:bg-[#00FFC2]/5 text-left transition-colors cursor-pointer ${estaActivo ? "bg-emerald-500/10 dark:bg-[#00FFC2]/10 text-emerald-700 dark:text-[#00FFC2] font-extrabold border border-emerald-500/20 dark:border-[#00FFC2]/20" : "text-slate-500 dark:text-slate-400"}`}
                                       >
                                         <span className="truncate">
-                                          🚘 {dispositivoInfo ? dispositivoInfo.name : `Unidad #${carro.deviceId}`}
+                                           {dispositivoInfo ? dispositivoInfo.name : `Unidad #${carro.deviceId}`}
                                         </span>
                                         <span className="text-[9px] opacity-80">
                                           {carro.speed} km/h
