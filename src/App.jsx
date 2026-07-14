@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react"; 
+import React, { useState, useEffect } from "react";
 import { Sun, Moon, Radio, Car, Search } from "lucide-react";
-import EstadoError from "./componentes/EstadoError"; 
-import VistaMapa from "./componentes/VistaMapa"; 
+import EstadoError from "./componentes/EstadoError";
+import VistaMapa from "./componentes/VistaMapa";
 import TarjetaTelemetria from "./componentes/TarjetaTelemetria";
 import logoSimon from "./imagenes/logo-simon-movilidad.svg";
 
@@ -33,7 +33,8 @@ export default function App() {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   const [dispositivos, setDispositivos] = useState([]);
-  const [idDispositivoSeleccionado, setIdDispositivoSeleccionado] = useState("");
+  const [idDispositivoSeleccionado, setIdDispositivoSeleccionado] =
+    useState("");
   const [posicionActual, setPosicionActual] = useState(null);
 
   const [datosEstructurados, setDatosEstructurados] = useState({});
@@ -131,7 +132,8 @@ export default function App() {
       window.posicionesFlotaCompleta = posicionesMasivas;
 
       if (posicionesMasivas.length > 0) {
-        const primerDispositivoConMapa = posicionesMasivas[0].deviceId.toString();
+        const primerDispositivoConMapa =
+          posicionesMasivas[0].deviceId.toString();
         setIdDispositivoSeleccionado(primerDispositivoConMapa);
         setPosicionActual(posicionesMasivas[0]);
       } else if (listaFlotaMasiva.length > 0) {
@@ -222,7 +224,7 @@ export default function App() {
                   Sala de Control
                 </h1>
                 <p className="text-[10px] text-slate-400">
-                  Logística de Flotas
+                  Logística de vehículos 
                 </p>
               </div>
             </div>
@@ -235,21 +237,30 @@ export default function App() {
             {modoOscuro ? (
               <Sun size={16} className="text-emerald-500 dark:text-[#00FFC2]" />
             ) : (
-              <Moon size={16} className="text-emerald-500 dark:text-[#00FFC2]" />
+              <Moon
+                size={16}
+                className="text-emerald-500 dark:text-[#00FFC2]"
+              />
             )}
           </button>
         </header>
 
         {/* PANTALLA DE CARGA */}
         {cargando && (
-          <div className="absolute inset-0 bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur-md flex flex-col items-center justify-center gap-4 pointer-events-auto z-50">
-            <div className="p-5 bg-slate-950 rounded-full border border-[#00FFC2]/30 shadow-xl animate-bounce text-[#00FFC2]">
-              <Car size={32} />
-            </div>
-            <span className="text-xs font-bold tracking-wide uppercase text-slate-700 dark:text-cyan-400">
-              Sincronizando Sistema...
-            </span>
-          </div>
+     <div className="absolute inset-0 bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur-md flex flex-col items-center justify-center gap-4 pointer-events-auto z-50">
+  <div className="p-5 bg-[#00f1c7] rounded-full shadow-lg shadow-[#00f1c7]/30 dark:shadow-[#00f1c7]/50 animate-bounce text-slate-950">
+    <Car size={32} />
+  </div>
+
+  <div className="text-center px-4">
+    <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">
+      Estamos preparando tus vehículos...
+    </p>
+    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+      Sincronizando los últimos detalles.
+    </p>
+  </div>
+</div>
         )}
 
         {error && (
@@ -265,7 +276,9 @@ export default function App() {
               <button
                 onClick={() => setTabActiva("flota")}
                 className={`flex-1 py-1.5 text-center text-[10px] font-extrabold uppercase rounded-lg transition-all cursor-pointer ${
-                  tabActiva === "flota" ? "bg-[#00FFC2] text-slate-950 shadow" : "text-slate-500 dark:text-slate-400"
+                  tabActiva === "flota"
+                    ? "bg-[#00FFC2] text-slate-950 shadow"
+                    : "text-slate-500 dark:text-slate-400"
                 }`}
               >
                 vehículos ({dispositivos.length})
@@ -273,13 +286,15 @@ export default function App() {
               <button
                 onClick={() => setTabActiva("telemetria")}
                 className={`flex-1 py-1.5 text-center text-[10px] font-extrabold uppercase rounded-lg transition-all cursor-pointer ${
-                  tabActiva === "telemetria" ? "bg-[#00FFC2] text-slate-950 shadow" : "text-slate-500 dark:text-slate-400"
+                  tabActiva === "telemetria"
+                    ? "bg-[#00FFC2] text-slate-950 shadow"
+                    : "text-slate-500 dark:text-slate-400"
                 }`}
               >
                 Telemetría
               </button>
             </div>
-            <div 
+            <div
               id="contenedor-paneles-movil"
               className="flex flex-col gap-3 pointer-events-auto md:max-h-[75vh] pr-1"
             >
@@ -294,7 +309,10 @@ export default function App() {
                 <div className="flex flex-col gap-1.5 border-b border-slate-100 dark:border-slate-800 pb-2 mb-2 flex-shrink-0">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-1.5">
-                      <Car size={14} className="text-emerald-500 dark:text-[#00FFC2]" />
+                      <Car
+                        size={14}
+                        className="text-emerald-500 dark:text-[#00FFC2]"
+                      />
                       <h2 className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
                         Vehículos monitoreados
                       </h2>
@@ -305,7 +323,10 @@ export default function App() {
                   </div>
 
                   <div className="relative w-full">
-                    <Search size={12} className="absolute left-2.5 top-2 text-slate-500 dark:text-slate-400" />
+                    <Search
+                      size={12}
+                      className="absolute left-2.5 top-2 text-slate-500 dark:text-slate-400"
+                    />
                     <input
                       type="text"
                       placeholder="Filtrar..."
@@ -325,7 +346,10 @@ export default function App() {
                       if (menu) {
                         const isHidden = menu.classList.contains("hidden");
                         menu.classList.toggle("hidden", !isHidden);
-                        e.currentTarget.setAttribute("aria-expanded", isHidden ? "true" : "false");
+                        e.currentTarget.setAttribute(
+                          "aria-expanded",
+                          isHidden ? "true" : "false",
+                        );
                       }
                     }}
                     aria-haspopup="listbox"
@@ -337,7 +361,9 @@ export default function App() {
                     }`}
                   >
                     <span className="flex items-center gap-1.5">
-                      {paisSeleccionado === "Todos" ? "Filtrar por País" : `País: ${paisSeleccionado}`}
+                      {paisSeleccionado === "Todos"
+                        ? "Filtrar por País"
+                        : `País: ${paisSeleccionado}`}
                     </span>
                     <span className="text-[8px]">▼</span>
                   </button>
@@ -349,7 +375,9 @@ export default function App() {
                         e.currentTarget.parentElement.classList.add("hidden");
                       }}
                       className={`w-full text-left px-3 py-2 text-[10px] font-extrabold uppercase hover:bg-slate-50 dark:hover:bg-white/5 transition-colors ${
-                        paisSeleccionado === "Todos" ? "bg-[#00FFC2] text-slate-950" : "text-slate-700 dark:text-slate-300"
+                        paisSeleccionado === "Todos"
+                          ? "bg-[#00FFC2] text-slate-950"
+                          : "text-slate-700 dark:text-slate-300"
                       }`}
                     >
                       Todos
@@ -362,7 +390,9 @@ export default function App() {
                           e.currentTarget.parentElement.classList.add("hidden");
                         }}
                         className={`w-full text-left px-3 py-2 text-[10px] font-extrabold uppercase border-t border-slate-100 dark:border-slate-900 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors ${
-                          paisSeleccionado === pais ? "bg-[#00FFC2] text-slate-950" : "text-slate-700 dark:text-slate-300"
+                          paisSeleccionado === pais
+                            ? "bg-[#00FFC2] text-slate-950"
+                            : "text-slate-700 dark:text-slate-300"
                         }`}
                       >
                         {pais}
@@ -383,17 +413,32 @@ export default function App() {
                 ) : (
                   <div className="overflow-y-auto flex-1 space-y-2 pr-1">
                     {Object.entries(datosEstructurados)
-                      .filter(([pais]) => paisSeleccionado === "Todos" || paisSeleccionado === pais)
+                      .filter(
+                        ([pais]) =>
+                          paisSeleccionado === "Todos" ||
+                          paisSeleccionado === pais,
+                      )
                       .map(([pais, ciudades]) => (
                         <div key={pais} className="space-y-1">
                           <h3 className="text-[9px] font-bold uppercase tracking-widest text-slate-450 dark:text-slate-500">
-                             {pais}
+                            {pais}
                           </h3>
 
                           {Object.entries(ciudades)
-                            .filter(([ciudad]) => ciudad.toLowerCase().includes(busqueda.toLowerCase()) || pais.toLowerCase().includes(busqueda.toLowerCase()))
+                            .filter(
+                              ([ciudad]) =>
+                                ciudad
+                                  .toLowerCase()
+                                  .includes(busqueda.toLowerCase()) ||
+                                pais
+                                  .toLowerCase()
+                                  .includes(busqueda.toLowerCase()),
+                            )
                             .map(([ciudad, carros]) => (
-                              <div key={ciudad} className="flex flex-col gap-1 pl-1">
+                              <div
+                                key={ciudad}
+                                className="flex flex-col gap-1 pl-1"
+                              >
                                 <div className="flex items-center justify-between p-1 bg-slate-50/50 dark:bg-slate-800/30 rounded-lg">
                                   <span className="text-[10px] font-semibold text-slate-700 dark:text-slate-300">
                                     {ciudad}
@@ -405,14 +450,22 @@ export default function App() {
 
                                 <div className="pl-1 space-y-0.5 max-h-24 overflow-y-auto">
                                   {carros.map((carro) => {
-                                    const dispositivoInfo = dispositivos.find((d) => d.id.toString() === carro.deviceId.toString());
-                                    const estaActivo = idDispositivoSeleccionado.toString() === carro.deviceId.toString();
+                                    const dispositivoInfo = dispositivos.find(
+                                      (d) =>
+                                        d.id.toString() ===
+                                        carro.deviceId.toString(),
+                                    );
+                                    const estaActivo =
+                                      idDispositivoSeleccionado.toString() ===
+                                      carro.deviceId.toString();
 
                                     return (
                                       <button
                                         key={carro.deviceId}
                                         onClick={() => {
-                                          setIdDispositivoSeleccionado(carro.deviceId.toString());
+                                          setIdDispositivoSeleccionado(
+                                            carro.deviceId.toString(),
+                                          );
                                           if (window.innerWidth < 768) {
                                             setTabActiva("telemetria");
                                           }
@@ -420,7 +473,9 @@ export default function App() {
                                         className={`w-full flex items-center justify-between text-[10px] p-1 rounded hover:bg-emerald-50/50 dark:hover:bg-[#00FFC2]/5 text-left transition-colors cursor-pointer ${estaActivo ? "bg-emerald-500/10 dark:bg-[#00FFC2]/10 text-emerald-700 dark:text-[#00FFC2] font-extrabold border border-emerald-500/20 dark:border-[#00FFC2]/20" : "text-slate-500 dark:text-slate-400"}`}
                                       >
                                         <span className="truncate">
-                                           {dispositivoInfo ? dispositivoInfo.name : `Unidad #${carro.deviceId}`}
+                                          {dispositivoInfo
+                                            ? dispositivoInfo.name
+                                            : `Unidad #${carro.deviceId}`}
                                         </span>
                                         <span className="text-[9px] opacity-80">
                                           {carro.speed} km/h
