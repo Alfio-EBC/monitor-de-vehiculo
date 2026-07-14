@@ -91,3 +91,50 @@ body,
     scrollbar-color: rgba(0, 255, 194, 0.15) transparent; /* Verde menta en modo oscuro */
   }
 }
+/* ==========================================
+   ARQUITECTURA DE SCROLLS NATIVOS EN MÓVILES (CON ID)
+   ========================================== */
+@media (max-width: 767px) {
+  /* 1. El padre NO debe hacer scroll, solo contener los elementos de forma rígida */
+  #contenedor-paneles-movil {
+    max-height: 48vh;
+    overflow: visible;
+  }
+
+  /* 2. Ajuste estricto para la tarjeta de la lista de Vehículos */
+  #lista-vehiculos-movil {
+    height: 42vh;
+    max-height: 42vh;
+    overflow: hidden; /* Mantiene el buscador fijo arriba */
+  }
+
+  /* Forzamos a la sub-caja interna de los carros a hacer el scroll real */
+  #lista-vehiculos-movil .overflow-y-auto {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    max-height: calc(42vh - 110px) !important; /* Resta el espacio del buscador y el botón de país */
+    touch-action: pan-y !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  #telemetria-movil {
+    height: 42vh;
+    max-height: 42vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+@media (min-width: 768px) {
+  #contenedor-paneles-movil {
+    max-height: 75vh;
+  }
+  #lista-vehiculos-movil {
+    height: 260px;
+    max-height: none;
+  }
+  #telemetria-movil {
+    max-height: none;
+    overflow: visible;
+  }
+}

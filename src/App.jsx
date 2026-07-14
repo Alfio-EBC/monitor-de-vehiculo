@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"; 
 import { Sun, Moon, Radio, Car, Search } from "lucide-react";
-import EstadoError from "./componentes/Estadoerror";
-import VistaMapa from "./componentes/Vistamapa";
+import EstadoError from "./componentes/EstadoError"; 
+import VistaMapa from "./componentes/VistaMapa"; 
 import TarjetaTelemetria from "./componentes/TarjetaTelemetria";
 import logoSimon from "./imagenes/logo-simon-movilidad.svg";
 
@@ -33,8 +33,7 @@ export default function App() {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   const [dispositivos, setDispositivos] = useState([]);
-  const [idDispositivoSeleccionado, setIdDispositivoSeleccionado] =
-    useState("");
+  const [idDispositivoSeleccionado, setIdDispositivoSeleccionado] = useState("");
   const [posicionActual, setPosicionActual] = useState(null);
 
   const [datosEstructurados, setDatosEstructurados] = useState({});
@@ -132,11 +131,8 @@ export default function App() {
       window.posicionesFlotaCompleta = posicionesMasivas;
 
       if (posicionesMasivas.length > 0) {
-        const primerDispositivoConMapa =
-          posicionesMasivas[0].deviceId.toString();
+        const primerDispositivoConMapa = posicionesMasivas[0].deviceId.toString();
         setIdDispositivoSeleccionado(primerDispositivoConMapa);
-
-        // CORREGIDO: Inicializamos posicionActual de forma directa sin latCamara alterada
         setPosicionActual(posicionesMasivas[0]);
       } else if (listaFlotaMasiva.length > 0) {
         setIdDispositivoSeleccionado(listaFlotaMasiva[0].id.toString());
@@ -165,7 +161,6 @@ export default function App() {
     inicializarRastreador();
   }, []);
 
-  // CORREGIDO: Evita re-renders innecesarios y elimina totalmente la compensación manual de latitud
   useEffect(() => {
     if (!idDispositivoSeleccionado) return;
 
@@ -176,7 +171,6 @@ export default function App() {
         );
         if (posEncontrada) {
           setPosicionActual((prev) => {
-            // Si el vehículo, las coordenadas, el rumbo y la velocidad son exactamente iguales, no actualizamos el estado
             if (
               prev &&
               prev.deviceId.toString() === posEncontrada.deviceId.toString() &&
@@ -217,15 +211,12 @@ export default function App() {
         <header className="w-full flex items-center justify-between pointer-events-auto bg-[#04050a]/90 backdrop-blur-md border-x-0 dark:border-[#00FFC2]/20 p-3 md:px-6 rounded-none shadow-lg transition-colors duration-300">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-3">
-              {/* Logo */}
               <img
                 src={logoSimon}
                 alt="Logo Simón Movilidad"
                 className="w-21 h-8 object-contain"
               />
-
               <div className="w-px h-6 bg-slate-800" aria-hidden="true" />
-
               <div>
                 <h1 className="text-sm font-bold tracking-tight leading-none mb-1 text-white">
                   Sala de Control
@@ -244,10 +235,7 @@ export default function App() {
             {modoOscuro ? (
               <Sun size={16} className="text-emerald-500 dark:text-[#00FFC2]" />
             ) : (
-              <Moon
-                size={16}
-                className="text-emerald-500 dark:text-[#00FFC2]"
-              />
+              <Moon size={16} className="text-emerald-500 dark:text-[#00FFC2]" />
             )}
           </button>
         </header>
@@ -275,43 +263,40 @@ export default function App() {
             {/* Pestañas exclusivo para Móviles */}
             <div className="flex md:hidden bg-slate-100 dark:bg-[#04050a]/90 backdrop-blur-md p-1 rounded-xl border border-slate-200 dark:border-slate-800 mb-2 pointer-events-auto shadow-md">
               <button
-                onClick={() => window.setTabActiva?.("flota")}
+                onClick={() => setTabActiva("flota")}
                 className={`flex-1 py-1.5 text-center text-[10px] font-extrabold uppercase rounded-lg transition-all cursor-pointer ${
-                  (window.tabActiva || "flota") === "flota"
-                    ? "bg-[#00FFC2] text-slate-950 shadow"
-                    : "text-slate-500 dark:text-slate-400"
+                  tabActiva === "flota" ? "bg-[#00FFC2] text-slate-950 shadow" : "text-slate-500 dark:text-slate-400"
                 }`}
               >
                 vehículos ({dispositivos.length})
               </button>
               <button
-                onClick={() => window.setTabActiva?.("telemetria")}
+                onClick={() => setTabActiva("telemetria")}
                 className={`flex-1 py-1.5 text-center text-[10px] font-extrabold uppercase rounded-lg transition-all cursor-pointer ${
-                  window.tabActiva === "telemetria"
-                    ? "bg-[#00FFC2] text-slate-950 shadow"
-                    : "text-slate-500 dark:text-slate-400"
+                  tabActiva === "telemetria" ? "bg-[#00FFC2] text-slate-950 shadow" : "text-slate-500 dark:text-slate-400"
                 }`}
               >
                 Telemetría
               </button>
             </div>
 
-            <div className="flex flex-col gap-3 pointer-events-auto max-h-[50vh] md:max-h-[75vh] overflow-y-auto pr-1">
+            {/* 🟢 CONTENEDOR PADRE UNIFICADO CON SU ID DE CONTROL (SIN RE-RENDERS DE EVENTOS ADICIONALES) */}
+            <div 
+              id="contenedor-paneles-movil"
+              className="flex flex-col gap-3 pointer-events-auto md:max-h-[75vh] pr-1"
+            >
+              {/* SECCIÓN 1: PANEL DE VEHÍCULOS */}
               <section
+                id="lista-vehiculos-movil"
                 className={`bg-white/95 dark:bg-[#04050a]/95 backdrop-blur-md border border-slate-200 dark:border-[#00ffc2]/20 rounded-2xl p-3 shadow-xl w-full flex flex-col h-[280px] md:h-[260px] overflow-hidden transition-all duration-300 ${
-                  (window.tabActiva || "flota") === "flota"
-                    ? "flex"
-                    : "hidden md:flex"
+                  tabActiva === "flota" ? "flex" : "hidden md:flex"
                 }`}
                 aria-label="Panel de vehículos"
               >
                 <div className="flex flex-col gap-1.5 border-b border-slate-100 dark:border-slate-800 pb-2 mb-2 flex-shrink-0">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-1.5">
-                      <Car
-                        size={14}
-                        className="text-emerald-500 dark:text-[#00FFC2]"
-                      />
+                      <Car size={14} className="text-emerald-500 dark:text-[#00FFC2]" />
                       <h2 className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
                         Vehículos monitoreados
                       </h2>
@@ -322,10 +307,7 @@ export default function App() {
                   </div>
 
                   <div className="relative w-full">
-                    <Search
-                      size={12}
-                      className="absolute left-2.5 top-2 text-slate-500 dark:text-slate-400"
-                    />
+                    <Search size={12} className="absolute left-2.5 top-2 text-slate-500 dark:text-slate-400" />
                     <input
                       type="text"
                       placeholder="Filtrar..."
@@ -345,10 +327,7 @@ export default function App() {
                       if (menu) {
                         const isHidden = menu.classList.contains("hidden");
                         menu.classList.toggle("hidden", !isHidden);
-                        e.currentTarget.setAttribute(
-                          "aria-expanded",
-                          isHidden ? "true" : "false",
-                        );
+                        e.currentTarget.setAttribute("aria-expanded", isHidden ? "true" : "false");
                       }
                     }}
                     aria-haspopup="listbox"
@@ -360,9 +339,7 @@ export default function App() {
                     }`}
                   >
                     <span className="flex items-center gap-1.5">
-                      {paisSeleccionado === "Todos"
-                        ? "Filtrar por País"
-                        : `País: ${paisSeleccionado}`}
+                      {paisSeleccionado === "Todos" ? "Filtrar por País" : `País: ${paisSeleccionado}`}
                     </span>
                     <span className="text-[8px]">▼</span>
                   </button>
@@ -374,9 +351,7 @@ export default function App() {
                         e.currentTarget.parentElement.classList.add("hidden");
                       }}
                       className={`w-full text-left px-3 py-2 text-[10px] font-extrabold uppercase hover:bg-slate-50 dark:hover:bg-white/5 transition-colors ${
-                        paisSeleccionado === "Todos"
-                          ? "bg-[#00FFC2] text-slate-950"
-                          : "text-slate-700 dark:text-slate-300"
+                        paisSeleccionado === "Todos" ? "bg-[#00FFC2] text-slate-950" : "text-slate-700 dark:text-slate-300"
                       }`}
                     >
                       Todos
@@ -389,9 +364,7 @@ export default function App() {
                           e.currentTarget.parentElement.classList.add("hidden");
                         }}
                         className={`w-full text-left px-3 py-2 text-[10px] font-extrabold uppercase border-t border-slate-100 dark:border-slate-900 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors ${
-                          paisSeleccionado === pais
-                            ? "bg-[#00FFC2] text-slate-950"
-                            : "text-slate-700 dark:text-slate-300"
+                          paisSeleccionado === pais ? "bg-[#00FFC2] text-slate-950" : "text-slate-700 dark:text-slate-300"
                         }`}
                       >
                         {pais}
@@ -412,11 +385,7 @@ export default function App() {
                 ) : (
                   <div className="overflow-y-auto flex-1 space-y-2 pr-1">
                     {Object.entries(datosEstructurados)
-                      .filter(
-                        ([pais]) =>
-                          paisSeleccionado === "Todos" ||
-                          paisSeleccionado === pais,
-                      )
+                      .filter(([pais]) => paisSeleccionado === "Todos" || paisSeleccionado === pais)
                       .map(([pais, ciudades]) => (
                         <div key={pais} className="space-y-1">
                           <h3 className="text-[9px] font-bold uppercase tracking-widest text-slate-450 dark:text-slate-500">
@@ -424,20 +393,9 @@ export default function App() {
                           </h3>
 
                           {Object.entries(ciudades)
-                            .filter(
-                              ([ciudad]) =>
-                                ciudad
-                                  .toLowerCase()
-                                  .includes(busqueda.toLowerCase()) ||
-                                pais
-                                  .toLowerCase()
-                                  .includes(busqueda.toLowerCase()),
-                            )
+                            .filter(([ciudad]) => ciudad.toLowerCase().includes(busqueda.toLowerCase()) || pais.toLowerCase().includes(busqueda.toLowerCase()))
                             .map(([ciudad, carros]) => (
-                              <div
-                                key={ciudad}
-                                className="flex flex-col gap-1 pl-1"
-                              >
+                              <div key={ciudad} className="flex flex-col gap-1 pl-1">
                                 <div className="flex items-center justify-between p-1 bg-slate-50/50 dark:bg-slate-800/30 rounded-lg">
                                   <span className="text-[10px] font-semibold text-slate-700 dark:text-slate-300">
                                     {ciudad}
@@ -449,33 +407,22 @@ export default function App() {
 
                                 <div className="pl-1 space-y-0.5 max-h-24 overflow-y-auto">
                                   {carros.map((carro) => {
-                                    const dispositivoInfo = dispositivos.find(
-                                      (d) =>
-                                        d.id.toString() ===
-                                        carro.deviceId.toString(),
-                                    );
-                                    const estaActivo =
-                                      idDispositivoSeleccionado.toString() ===
-                                      carro.deviceId.toString();
+                                    const dispositivoInfo = dispositivos.find((d) => d.id.toString() === carro.deviceId.toString());
+                                    const estaActivo = idDispositivoSeleccionado.toString() === carro.deviceId.toString();
 
                                     return (
                                       <button
                                         key={carro.deviceId}
                                         onClick={() => {
-                                          setIdDispositivoSeleccionado(
-                                            carro.deviceId.toString(),
-                                          );
+                                          setIdDispositivoSeleccionado(carro.deviceId.toString());
                                           if (window.innerWidth < 768) {
-                                            window.setTabActiva?.("telemetria");
+                                            setTabActiva("telemetria");
                                           }
                                         }}
                                         className={`w-full flex items-center justify-between text-[10px] p-1 rounded hover:bg-emerald-50/50 dark:hover:bg-[#00FFC2]/5 text-left transition-colors cursor-pointer ${estaActivo ? "bg-emerald-500/10 dark:bg-[#00FFC2]/10 text-emerald-700 dark:text-[#00FFC2] font-extrabold border border-emerald-500/20 dark:border-[#00FFC2]/20" : "text-slate-500 dark:text-slate-400"}`}
                                       >
                                         <span className="truncate">
-                                          🚘{" "}
-                                          {dispositivoInfo
-                                            ? dispositivoInfo.name
-                                            : `Unidad #${carro.deviceId}`}
+                                          🚘 {dispositivoInfo ? dispositivoInfo.name : `Unidad #${carro.deviceId}`}
                                         </span>
                                         <span className="text-[9px] opacity-80">
                                           {carro.speed} km/h
@@ -492,21 +439,14 @@ export default function App() {
                 )}
               </section>
 
-              {/* Panel telemetria */}
+              {/* SECCIÓN 2: PANEL DE TELEMETRÍA */}
               <div
+                id="telemetria-movil"
                 className={`w-full flex-shrink-0 pointer-events-auto transition-all duration-300 ${
-                  window.tabActiva === "telemetria"
-                    ? "block"
-                    : "hidden md:block"
-                }`}
-                style={{
-    
-                  maxHeight: window.innerWidth < 768 ? "40vh" : "none",
-                  overflowY: "auto",
-                  WebkitOverflowScrolling: "touch", 
-                }}
+                  tabActiva === "telemetria" ? "block" : "hidden md:block"
+                } md:max-h-none md:overflow-visible`}
               >
-                <div className="w-full h-full pb-4">
+                <div className="w-full pb-6 md:pb-0">
                   <TarjetaTelemetria
                     dispositivoActivo={dispositivoActivo}
                     posicionActual={posicionActual}
