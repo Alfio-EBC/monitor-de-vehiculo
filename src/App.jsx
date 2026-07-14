@@ -494,16 +494,24 @@ export default function App() {
 
               {/* Panel telemetria */}
               <div
-                className={`w-full flex-shrink-0 max-h-[40vh] md:max-h-none overflow-y-auto rounded-2xl ${
+                className={`w-full flex-shrink-0 pointer-events-auto transition-all duration-300 ${
                   window.tabActiva === "telemetria"
                     ? "block"
                     : "hidden md:block"
                 }`}
+                style={{
+    
+                  maxHeight: window.innerWidth < 768 ? "40vh" : "none",
+                  overflowY: "auto",
+                  WebkitOverflowScrolling: "touch", 
+                }}
               >
-                <TarjetaTelemetria
-                  dispositivoActivo={dispositivoActivo}
-                  posicionActual={posicionActual}
-                />
+                <div className="w-full h-full pb-4">
+                  <TarjetaTelemetria
+                    dispositivoActivo={dispositivoActivo}
+                    posicionActual={posicionActual}
+                  />
+                </div>
               </div>
             </div>
           </div>
