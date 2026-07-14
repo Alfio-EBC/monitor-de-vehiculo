@@ -9,9 +9,7 @@ export default function TarjetaTelemetria({ dispositivoActivo, posicionActual })
       </div>
     );
   }
-
   const esOnline = dispositivoActivo.status === "online";
-
   return (
     <section
       className="bg-white/95 dark:bg-[#04050a]/95 backdrop-blur-md border border-slate-200 dark:border-[#00ffc2]/20 rounded-2xl p-3 shadow-xl w-full flex flex-col gap-2 transition-all duration-300"

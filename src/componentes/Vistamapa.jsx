@@ -10,7 +10,6 @@ import miAutoSvgRaw from "../imagenes/mi-auto.svg?raw";
 function CambiarVista({ centro, idVehiculo }) {
   const mapa = useMap();
   const ultimoIdCentrado = useRef(null);
-  
   useEffect(() => {
     if (centro && centro[0] && centro[1]) {
       // Solo mover la cámara si realmente cambió el vehículo seleccionado
