@@ -149,6 +149,8 @@ const MAPAS_DISPONIBLES = {
   }
 };
 
+
+
 export default function VistaMapa({ posicion }) {
   // Coordenada real sin desvíos aritméticos
   const coordenadaReal = posicion 

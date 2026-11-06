@@ -64,6 +64,7 @@ export default function App() {
     }, 300);
   };
 
+
   const inicializarRastreador = async () => {
     setCargando(true);
     setError(null);
