@@ -65,7 +65,6 @@ Siga estos pasos para ejecutar la aplicacion en su entorno de desarrollo local:
 
     Simulacion de Telemetria Realista: Combina los datos de Traccar con coordenadas y rumbos de simulacion en plano urbano para 40 vehiculos concurrentes distribuidos en ciudades de Colombia, Peru, Argentina, Chile, Mexico y Espana.
 
-<<<<<<< HEAD
 
 *Estructura del Codigo
     El proyecto sigue una arquitectura de componentes modulares y desacoplados:
@@ -86,5 +85,3 @@ Siga estos pasos para ejecutar la aplicacion en su entorno de desarrollo local:
 ├── .env                       # Variables de entorno locales
 ├── package.json               # Dependencias del proyecto
 └── README.md                  # Documentacion
-=======
->>>>>>> 748dfd4d180ca989830d77def27ef9cd21944d62

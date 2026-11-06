@@ -2,16 +2,7 @@ import React from 'react';
 
 export default function CargadorEsqueleto() {
   return (
-<<<<<<< HEAD
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[calc(100vh-120px)] animate-pulse" aria-hidden="true">
-      {/* Esqueleto del Panel Lateral */}
-      <div className="space-y-4">
-        <div className="h-10 bg-slate-200 dark:bg-slate-800 rounded-lg"></div>
-        <div className="h-40 bg-slate-200 dark:bg-slate-800 rounded-xl"></div>
-      </div>
-      {/* Esqueleto del Mapa */}
-      <div className="lg:col-span-2 bg-slate-200 dark:bg-slate-800 rounded-xl h-full"></div>
-=======
+
     <div 
       className="absolute inset-0 w-full h-[100dvh] overflow-hidden bg-slate-100 dark:bg-slate-950 animate-pulse pointer-events-none z-50" 
       aria-hidden="true"
@@ -66,7 +57,7 @@ export default function CargadorEsqueleto() {
         </div>
 
       </div>
->>>>>>> 748dfd4d180ca989830d77def27ef9cd21944d62
+
     </div>
   );
 }
