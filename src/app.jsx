@@ -18,8 +18,6 @@ const CIUDADES_SEMILLA = [
   { pais: "México", ciudad: "CDMX", lat: 19.4326, lon: -99.1332 },
   { pais: "España", ciudad: "Madrid", lat: 40.4168, lon: -3.7038 },
 ];
-
-
 export default function App() {
   const [paisSeleccionado, setPaisSeleccionado] = useState("Todos");
   const [modoOscuro, setModoOscuro] = useState(() => {
@@ -505,6 +503,7 @@ export default function App() {
                     dispositivoActivo={dispositivoActivo}
                     posicionActual={posicionActual}
                   />
+
                 </div>
               </div>
             </div>
