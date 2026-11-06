@@ -19,6 +19,7 @@ const CIUDADES_SEMILLA = [
   { pais: "España", ciudad: "Madrid", lat: 40.4168, lon: -3.7038 },
 ];
 
+
 export default function App() {
   const [paisSeleccionado, setPaisSeleccionado] = useState("Todos");
   const [modoOscuro, setModoOscuro] = useState(() => {
