@@ -4,7 +4,6 @@ import EstadoError from "./componentes/EstadoError";
 import VistaMapa from "./componentes/VistaMapa";
 import TarjetaTelemetria from "./componentes/TarjetaTelemetria";
 import logoSimon from "./imagenes/logo-simon-movilidad.svg";
-
 const API_BASE = "/api";
 
 const CIUDADES_SEMILLA = [
