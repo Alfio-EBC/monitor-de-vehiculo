@@ -5,21 +5,66 @@
 }
 @font-face {
   font-family: 'MuseoSans';
+<<<<<<< HEAD
   src: url('/fonts/MuseoSans-500.woff2') format('woff2'),
        url('/fonts/MuseoSans-500.woff') format('woff');
+=======
+  src: url('/fonts/MuseoSans_500.otf') format('opentype');
+>>>>>>> 748dfd4d180ca989830d77def27ef9cd21944d62
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'MuseoSans';
+<<<<<<< HEAD
   src: url('/fonts/MuseoSans-700.woff2') format('woff2'),
        url('/fonts/MuseoSans-700.woff') format('woff');
+=======
+  src: url('/fonts/MuseoSans_500_Italic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'MuseoSans';
+  src: url('/fonts/MuseoSans_700.otf') format('opentype');
+>>>>>>> 748dfd4d180ca989830d77def27ef9cd21944d62
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
+<<<<<<< HEAD
 /*ESTILOS GENERALES*/
+=======
+@font-face {
+  font-family: 'MuseoSans';
+  src: url('/fonts/MuseoSans_700Italic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    font-size: clamp(14px, 0.5vw + 12px, 16px);
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+>>>>>>> 748dfd4d180ca989830d77def27ef9cd21944d62
 @variant dark (&:where(.dark, .dark *));
 
 html, 
@@ -31,11 +76,27 @@ body,
   padding: 0;
   font-family: var(--font-sans);
 }
+<<<<<<< HEAD
 /*  MAPA (LEAFLET) Y COMPONENTES*/
+=======
+@variant dark (&:where(.dark, .dark *));
+
+html, 
+body, 
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+}
+
+>>>>>>> 748dfd4d180ca989830d77def27ef9cd21944d62
 .leaflet-container {
   width: 100%;
   height: 100%;
 }
+<<<<<<< HEAD
 .dark .leaflet-tile-container {
   filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
 }
@@ -48,15 +109,39 @@ body,
 .dark .leaflet-tile-container img {
   mix-blend-mode: difference;
 }
+=======
+
+.dark .leaflet-tile-container {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+.dark .icono-gps-personalizado {
+  filter: invert(100%) hue-rotate(180deg);
+}
+
+.dark .leaflet-tile-container {
+  filter: invert(100%) hue-rotate(180deg) brightness(85%) contrast(110%) saturate(80%);
+}
+
+.dark .leaflet-tile-container img {
+  mix-blend-mode: difference;
+}
+
+>>>>>>> 748dfd4d180ca989830d77def27ef9cd21944d62
 .dark .icono-gps-personalizado,
 .dark .leaflet-marker-icon,
 .dark .leaflet-marker-shadow {
   filter: invert(100%) hue-rotate(180deg) brightness(120%);
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 748dfd4d180ca989830d77def27ef9cd21944d62
 .dark .leaflet-control-attribution {
   background-color: rgba(15, 23, 42, 0.8) !important; 
   color: #94a3b8 !important; /* text-slate-400 */
 }
+<<<<<<< HEAD
 .dark .leaflet-control-attribution a {
   color: #38bdf8 !important; 
 }
@@ -91,3 +176,95 @@ body,
     scrollbar-color: rgba(0, 255, 194, 0.15) transparent; /* Verde menta en modo oscuro */
   }
 }
+=======
+
+.dark .leaflet-control-attribution a {
+  color: #38bdf8 !important; 
+}
+
+/* SCROLLBARS */
+::-webkit-scrollbar {
+  width: 5px; 
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.3); 
+  border-radius: 20px;
+  transition: background-color 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(156, 163, 175, 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 255, 194, 0.15);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 255, 194, 0.4); 
+}
+
+/* CORREGIDO: Se cerró la llave faltante de la regla @supports */
+@supports (scrollbar-color: auto) {
+  * {
+    scrollbar-width: thin; /* Barra delgada nativa */
+    scrollbar-color: rgba(156, 163, 175, 0.3) transparent; 
+  }
+  .dark * {
+    scrollbar-color: rgba(0, 255, 194, 0.15) transparent; 
+  }
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 767px) {
+  #contenedor-paneles-movil {
+    max-height: 48vh;
+    overflow: visible;
+  }
+
+  #lista-vehiculos-movil {
+    height: 42vh;
+    max-height: 42vh;
+    overflow: hidden;
+  }
+
+  #lista-vehiculos-movil .overflow-y-auto {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    max-height: calc(42vh - 110px) !important; 
+    touch-action: pan-y !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #telemetria-movil {
+    height: 42vh;
+    max-height: 42vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (min-width: 768px) {
+  #contenedor-paneles-movil {
+    max-height: 75vh;
+  }
+
+  #lista-vehiculos-movil {
+    height: 260px;
+    max-height: none;
+  }
+
+  #telemetria-movil {
+    max-height: none;
+    overflow: visible;
+  }
+}
+>>>>>>> 748dfd4d180ca989830d77def27ef9cd21944d62

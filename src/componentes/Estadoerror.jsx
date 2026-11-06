@@ -8,7 +8,10 @@ export default function EstadoError({ mensaje, alReintentar }) {
         <AlertTriangle size={40} />
       </div>
       
+<<<<<<< HEAD
    
+=======
+>>>>>>> 748dfd4d180ca989830d77def27ef9cd21944d62
       <h2 className="text-xl font-bold text-white mb-2">
         Conexión Interrumpida
       </h2>
