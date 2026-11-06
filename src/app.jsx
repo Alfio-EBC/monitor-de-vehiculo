@@ -5,7 +5,7 @@ import VistaMapa from "./componentes/VistaMapa";
 import TarjetaTelemetria from "./componentes/TarjetaTelemetria";
 import logoSimon from "./imagenes/logo-simon-movilidad.svg";
 
-const API_BASE = "https://demo4.traccar.org/api";
+const API_BASE = "/api";
 
 const CIUDADES_SEMILLA = [
   { pais: "Colombia", ciudad: "Bogotá", lat: 4.6097, lon: -74.0817 },

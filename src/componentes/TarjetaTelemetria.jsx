@@ -31,60 +31,7 @@ export default function TarjetaTelemetria({ dispositivoActivo, posicionActual })
         </span>
       </div>
 
-<<<<<<< HEAD
-      <div className="space-y-2">
-        <div className="flex items-center gap-3 p-1.5 bg-slate-50 dark:bg-slate-900/40 rounded-xl border border-slate-100 dark:border-slate-800/50">
-          <div className="p-2 bg-emerald-500/10 dark:bg-[#00FFC2]/10 rounded-lg text-emerald-600 dark:text-[#00FFC2]">
-            <Car size={14} />
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="text-[9px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold">
-              Vehículo
-            </p>
-            <p className="text-xs font-bold text-slate-700 dark:text-slate-200 truncate">
-              {dispositivoActivo.name}
-            </p>
-          </div>
-        </div>
-
-        <div className="hidden md:flex items-center gap-3 p-1.5 bg-slate-50 dark:bg-slate-900/40 rounded-xl border border-slate-100 dark:border-slate-800/50">
-          <div className="p-2 bg-emerald-500/10 dark:bg-[#00FFC2]/10 rounded-lg text-emerald-600 dark:text-[#00FFC2]">
-            <Radio size={14} />
-          </div>
-          <div>
-            <p className="text-[9px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold">
-              Conexión
-            </p>
-            <p className="text-xs font-bold text-slate-700 dark:text-slate-200">
-              {esOnline ? "Conectado" : "Desconectado"}
-            </p>
-          </div>
-        </div>
-        {/*Velocidad */}
-        <div className="flex items-center gap-3 p-1.5 bg-slate-50 dark:bg-slate-900/40 rounded-xl border border-slate-100 dark:border-slate-800/50">
-          <div className="p-2 bg-emerald-500/10 dark:bg-[#00FFC2]/10 rounded-lg text-emerald-600 dark:text-[#00FFC2]">
-            <Gauge size={14} />
-          </div>
-          <div>
-            <p className="text-[9px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold">
-              Velocidad
-            </p>
-            <p className="text-xs font-bold text-slate-700 dark:text-slate-200">
-              {posicionActual ? `${posicionActual.speed} km/h` : "---"}
-            </p>
-          </div>
-        </div>
-        <div className="flex items-center gap-3 p-1.5 bg-slate-50 dark:bg-slate-900/40 rounded-xl border border-slate-100 dark:border-slate-800/50">
-          <div className="p-2 bg-emerald-500/10 dark:bg-[#00FFC2]/10 rounded-lg text-emerald-600 dark:text-[#00FFC2]">
-            <Clock size={14} />
-          </div>
-          <div>
-            <p className="text-[9px] uppercase tracking-wider text-slate-400 dark:text-slate-500 font-bold">
-              Último Reporte
-            </p>
-            <p className="text-xs font-bold text-slate-700 dark:text-slate-200">
-=======
-      {/* 👇 CONTENEDOR SEMÁNTICO PRINCIPAL: Lista de Descripción (dl) 👇 */}
+      {/* CONTENEDOR SEMÁNTICO PRINCIPAL: Lista de Descripción (dl) */}
       <dl className="space-y-2">
         
         {/* VEHÍCULO */}
@@ -142,24 +89,15 @@ export default function TarjetaTelemetria({ dispositivoActivo, posicionActual })
               Último Reporte
             </dt>
             <dd className="text-xs font-bold text-slate-700 dark:text-slate-200">
->>>>>>> 748dfd4d180ca989830d77def27ef9cd21944d62
-              {posicionActual 
+              {dispositivoActivo.lastUpdate 
                 ? new Date(dispositivoActivo.lastUpdate).toLocaleTimeString() 
                 : "---"
               }
-<<<<<<< HEAD
-            </p>
-          </div>
-        </div>
-
-      </div>
-=======
             </dd>
           </div>
         </div>
 
       </dl>
->>>>>>> 748dfd4d180ca989830d77def27ef9cd21944d62
     </section>
   );
 }
