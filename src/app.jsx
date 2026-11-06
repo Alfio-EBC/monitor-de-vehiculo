@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Sun, Moon, Radio, Car, Search } from "lucide-react";
-import EstadoError from "./componentes/Estadoerror";
+import EstadoError from "./componentes/EstadoError";
 import VistaMapa from "./componentes/VistaMapa";
 import TarjetaTelemetria from "./componentes/TarjetaTelemetria";
 import logoSimon from "./imagenes/logo-simon-movilidad.svg";
